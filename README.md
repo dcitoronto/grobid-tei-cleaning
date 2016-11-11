@@ -12,7 +12,6 @@ Docker: https://docs.docker.com/docker-for-mac/
 
 Antconc: http://www.laurenceanthony.net/software.html
 
-
 ## Workflow
 1. Download and Install Docker (test it works and troubleshoot) 
     + Through the command line, install Grobid image:

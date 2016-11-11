@@ -6,7 +6,6 @@ A bash script for cleaning TEI xml tags from grombid outputs
 
 ## Tools & Resources
 
-
 1. GROWBID
 
   - [GROWBID documentation](https://grobid.readthedocs.io/en/latest/Grobid-service/)
@@ -19,7 +18,6 @@ A bash script for cleaning TEI xml tags from grombid outputs
 2. AntConc
 
   - http://www.laurenceanthony.net/software.html
-
 
 ## Extraction Workflow
 
@@ -38,9 +36,20 @@ A bash script for cleaning TEI xml tags from grombid outputs
 
 5. To extract a `.txt` of the meta and body text of all `.pdfs` we use X scripts to access GROBID's API.
 
+<<<<<<< HEAD
   `bash grobid-tei-cleaning/scripts/extract-text.sh`
 
 Access the API for grobid running locally using curl and redirecting (>) the output to a .txt:
+=======
+## Workflow
+1. Download and Install Docker (test it works and troubleshoot)
+    + Through the command line, install Grobid image:
+    `docker pull lfoppiano/grobid:0.4.1`
+2. Initialize from cli
+    `docker run -t --rm -p 8080:8080 lfoppiano/grobid:0.4.1`
+3. Make sure your .pdfs have a good PATH (It seems to make sense to run from that directory too)
+4. Access the API for grobid running locally using curl and redirecting (>) the output to a .txt:
+>>>>>>> 352bfeaaec3fba7834752b16b6e8a0f73bf99eb7
     + `curl -v --form input=@./thefile.pdf localhost:8080/processFulltextDocument`
     + Direct the output of that to a .txt file
 	+ `curl -v --form input=@./thefile.pdf localhost:8080/processFulltextDocument > theoutput.txt`

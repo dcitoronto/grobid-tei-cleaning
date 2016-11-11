@@ -17,4 +17,3 @@ do
    echo $file 
    curl -v --form input=@./$file localhost:8080/processFulltextDocument > $directory/$file.txt
 done
-

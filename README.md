@@ -1,38 +1,52 @@
 # grobid-tei-cleaning
-A bash script for cleaning TEI xml tags from grombid outputs
+
+Scripts and tools to support the extraction of full text from pdfs using Grobid, and corpus analysis using AntConc.
 
 ## Tools & Resources
-Grobid: https://grobid.readthedocs.io/en/latest/Grobid-service/
 
-Docker Grobid Repository: https://hub.docker.com/r/lfoppiano/grobid/
+1. GROWBID
+  - [GROWBID documentation](https://grobid.readthedocs.io/en/latest/Grobid-service/)
+  - [GROBID docker image](https://hub.docker.com/r/lfoppiano/grobid/)
+  - [GROBID API documentation](https://github.com/kermitt2/grobid/blob/master/grobid-service/src/main/doc/grobid-service-manual.pdf)
 
-API documentation: https://github.com/kermitt2/grobid/blob/master/grobid-service/src/main/doc/grobid-service-manual.pdf
+2. AntConc
+  - [Software Download](http://www.laurenceanthony.net/software.html)
 
-Docker: https://docs.docker.com/docker-for-mac/
+## Requirements
 
-Antconc: http://www.laurenceanthony.net/software.html
+- Docker `v1.12.3` ([Docker for Mac](https://docs.docker.com/docker-for-mac/))
+- `bash`
+- `git`
 
-## Workflow
-1. Download and Install Docker (test it works and troubleshoot) 
-    + Through the command line, install Grobid image:
-    `docker pull lfoppiano/grobid:0.4.1`
-2. Initialize from cli
-    `docker run -t --rm -p 8080:8080 lfoppiano/grobid:0.4.1`
-3. Make sure your .pdfs have a good PATH (It seems to make sense to run from that directory too)
-4. Access the API for grobid running locally using curl and redirecting (>) the output to a .txt: 
-    + `curl -v --form input=@./thefile.pdf localhost:8080/processFulltextDocument`
-    + Direct the output of that to a .txt file
-	+ `curl -v --form input=@./thefile.pdf localhost:8080/processFulltextDocument > theoutput.txt`
-5. View in your prefered text editor (xml syntax highlighting recommended)
+## Extraction Workflow
 
-## Open Questions
-### Grobid
-+ Not seeing all the services that we anticipated from the browser interface
-+ Do we want this running in a container ‘locally’? Or on the cluster?
-+ Further, ‘locally’ doesn’t seem to be a good decision on our personal machines
+1. Download and install Docker (test it works and troubleshoot)
 
-### Antconc
+2. Navigate to the folder containing your `.pdfs` (scripts are designed to run locally in the directory)
+  `$ cd <path to file>`
 
-### Overall
-+ Need to investigate more whether we should be pulling less using growbid, or isolating how we search in antconc?
-+ Scripting to bridge the gap?
+3. Clone this git repository into the directory  
+  `$ git clone https://github.com/dcitoronto/grobid-tei-cleaning.git`
+
+4. Run the setup script  
+**WARNING, this currently is large! (~200Mb)**  
+  `$ bash grobid-tei-cleaning/scripts/setup.sh`
+
+5. Initialize docker  
+  `$ docker run -t --rm -p 8080:8080 lfoppiano/grobid:0.4.1`
+
+6. To extract a `.xml` of the meta and body text of all `.pdfs` we use a script to access GROBID's API.
+
+  `$ bash grobid-tei-cleaning/scripts/extract-text.sh`
+
+7. To convert **ONLY THE BODY TEXT** of these extracted `.xmls` to `.txts` we use a python script
+
+  `$ python3 grobid-tei-cleaning/scripts/tei-extraction.py`
+
+## Remaining
+
+- Streamline scripts (potentially reduce to one?)
+- Fail better around directories/files existing
+- Provide clearer success messages
+- Consider how to extract metadata
+- Symlink for toolbox python package?

@@ -35,8 +35,18 @@ Scripts and tools to support the extraction of full text from pdfs using Grobid,
 5. Initialize docker  
   `$ docker run -t --rm -p 8080:8080 lfoppiano/grobid:0.4.1`
 
-6. To extract a `.txt` of the meta and body text of all `.pdfs` we use X scripts to access GROBID's API.
+6. To extract a `.xml` of the meta and body text of all `.pdfs` we use a script to access GROBID's API.
 
   `$ bash grobid-tei-cleaning/scripts/extract-text.sh`
 
-7. View in your prefered text editor (xml syntax highlighting recommended)
+7. To convert **ONLY THE BODY TEXT** of these extracted `.xmls` to `.txts` we use a python script
+
+  `$ python3 grobid-tei-cleaning/scripts/tei-extraction.py`
+
+## Remaining
+
+- Streamline scripts (potentially reduce to one?)
+- Fail better around directories/files existing
+- Provide clearer success messages
+- Consider how to extract metadata
+- Symlink for toolbox python package?

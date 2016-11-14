@@ -19,5 +19,5 @@ fi
 for file in *.pdf
 do
    echo -e "${RED}$file${NC}"
-   curl -v --form input=@./$file localhost:8080/processFulltextDocument > $directory/$file.txt
+   curl -v --form input=@./$file localhost:8080/processFulltextDocument > $directory/$file.xml
 done

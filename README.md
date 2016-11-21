@@ -4,8 +4,8 @@ Scripts and tools to support the extraction of full text from pdfs using Grobid,
 
 ## Tools & Resources
 
-1. GROWBID
-  - [GROWBID documentation](https://grobid.readthedocs.io/en/latest/Grobid-service/)
+1. GROBID
+  - [GROBID documentation](https://grobid.readthedocs.io/en/latest/Grobid-service/)
   - [GROBID docker image](https://hub.docker.com/r/lfoppiano/grobid/)
   - [GROBID API documentation](https://github.com/kermitt2/grobid/blob/master/grobid-service/src/main/doc/grobid-service-manual.pdf)
 
